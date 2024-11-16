@@ -137,7 +137,7 @@ classical:
     interval: 86400
     format: yaml
 
-# 经典文本
+# 文本匹配
 text:
   &text
     type: http
