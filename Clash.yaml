@@ -137,7 +137,7 @@ classical:
     format: yaml
 
 text:
-  &test
+  &text
     type: http
     behavior: classical
     interval: 86400
