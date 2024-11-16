@@ -129,6 +129,7 @@ LoadBalance:
 
 # 锚点 规则类型参数
 # 每24小时更新一次
+# 经典匹配
 classical:
   &classical
     type: http
@@ -136,6 +137,7 @@ classical:
     interval: 86400
     format: yaml
 
+# 经典文本
 text:
   &text
     type: http
@@ -380,32 +382,32 @@ rule-providers:
   Copilot:
     <<: *classical
     path: './rules/Copilot.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Copilot/Copilot.yaml
 
   OneDrive:
     <<: *classical
     path: './rules/OneDrive.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive.yaml
 
   微软服务:
     <<: *classical
     path: './rules/Microsoft.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.yaml
 
   全球服务:
     <<: *classical
     path: './rules/Global_Classical.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Classical.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical.yaml
 
   大陆服务:
     <<: *classical
     path: './rules/ChinaMax_Classical.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml
 
   局域网络:
     <<: *classical
     path: './rules/Lan.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.yaml
 
 # 规则指向
 rules:
