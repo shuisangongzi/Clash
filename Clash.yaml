@@ -360,7 +360,7 @@ rule-providers:
   规则修正:
     <<: *text
     path: './rules/Proxy.text'
-    url: https://raw.githubusercontent.com/shuisangongzi/Clash/refs/heads/main/Proxy.textmain/Proxy.text
+    url: https://raw.githubusercontent.com/shuisangongzi/Clash/refs/heads/main/Proxy.text
 
   隐私保护:
     <<: *classical
