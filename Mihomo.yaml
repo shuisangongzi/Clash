@@ -1,9 +1,17 @@
 # 配置名称 Clash 配置
 # 适用范围 Mihomo 内核
 
+# 端口配置
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+#redir-port: 7893
+#tproxy-port: 7894
+
 # 基本配置
-mixed-port: 7890
+mode: rule
 ipv6: true
+log-level: info
 allow-lan: true
 unified-delay: true
 tcp-concurrent: true
@@ -130,8 +138,8 @@ classical:
     format: yaml
 
 # 经典文本
-classitext:
-  &classitext
+text:
+  &text
     type: http
     behavior: classical
     interval: 86400
@@ -368,7 +376,7 @@ proxy-groups:
 # 订阅规则
 rule-providers:
   规则修正:
-    <<: *classitext
+    <<: *text
     path: './rules/Proxy.text'
     url: https://raw.githubusercontent.com/shuisangongzi/Clash/refs/heads/main/Proxy.text
 
