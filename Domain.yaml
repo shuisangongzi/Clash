@@ -452,6 +452,6 @@ rules:
   - RULE-SET,全球域名,全球服务
   - RULE-SET,大陆服务,大陆服务
   - RULE-SET,大陆域名,大陆服务
-  - RULE-SET,大陆IP,大陆服务
+  - RULE-SET,大陆IP,大陆服务,no-resolve
   - RULE-SET,局域网络,直接连接
   - MATCH,漏网之鱼
