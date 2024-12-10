@@ -74,7 +74,7 @@ proxy-providers:
   Clash:
     <<: *NodeParam
     path: './Sub/Clash.yaml'
-    url: 'http://192.168.0.101:3000/download/collection/Clash'
+    url: 'https://gist.githubusercontent.com/shuisangongzi/9898cf241ee7c3aecbf4e62af137e61c/raw/Clash'
 
 # 锚点 时延优选参数
 # 每6秒一次惰性健康检查，容差20ms，时延超2秒判定为失败，失败3次触发健康检查
