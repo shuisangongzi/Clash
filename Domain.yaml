@@ -217,6 +217,11 @@ proxy-groups:
     proxies:
       - 全球服务
       - 直接连接
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
 
   - name: 全球服务
     type: select
