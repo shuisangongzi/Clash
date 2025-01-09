@@ -177,28 +177,29 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
     proxies:
+      - 全球服务
       - 香港节点
       - 台湾节点
       - 日本节点
       - 新国节点
       - 美国节点
-      - 直接连接
 
   - name: 电报服务
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
     proxies:
+      - 全球服务
       - 香港节点
       - 台湾节点
       - 日本节点
       - 新国节点
       - 美国节点
-      - 直接连接
 
   - name: 微软服务
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
     proxies:
+      - 全球服务
       - 香港节点
       - 台湾节点
       - 日本节点
