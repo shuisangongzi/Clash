@@ -195,38 +195,16 @@ proxy-groups:
       - 美国节点
       - 直接连接
 
-  - name: Copilot
-    type: select
-    icon: https://raw.githubusercontent.com/shuisangongzi/icon/refs/heads/main/Copilot.png
-    proxies:
-      - 直接连接
-      - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新国节点
-      - 美国节点
-
-  - name: OneDrive
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/OneDrive.png
-    proxies:
-      - 香港节点
-      - 台湾节点
-      - 日本节点
-      - 新国节点
-      - 美国节点
-      - 直接连接 
-
   - name: 微软服务
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
     proxies:
-      - 直接连接
       - 香港节点
       - 台湾节点
       - 日本节点
       - 新国节点
       - 美国节点
+      - 直接连接
 
   - name: 全球服务
     type: select
@@ -377,16 +355,6 @@ rule-providers:
     path: './rules/Telegram.yaml'
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
 
-  Copilot:
-    <<: *classical
-    path: './rules/Copilot.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Copilot/Copilot_No_Resolve.yaml
-
-  OneDrive:
-    <<: *classical
-    path: './rules/OneDrive.yaml'
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OneDrive/OneDrive_No_Resolve.yaml
-
   微软服务:
     <<: *classical
     path: './rules/Microsoft.yaml'
@@ -408,8 +376,6 @@ rules:
   - RULE-SET,隐私保护,隐私保护
   - RULE-SET,运营劫持,隐私保护
   - RULE-SET,电报服务,电报服务
-  - RULE-SET,Copilot,Copilot
-  - RULE-SET,OneDrive,OneDrive
   - RULE-SET,微软服务,微软服务
   - RULE-SET,全球服务,全球服务
   - RULE-SET,大陆服务,大陆服务
