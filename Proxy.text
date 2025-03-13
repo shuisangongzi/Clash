@@ -1,0 +1,16 @@
+# NAME Proxy
+# By Surge
+
+# 规则修正
+DOMAIN-KEYWORD,efcloud
+DOMAIN-KEYWORD,fccloud
+DOMAIN-KEYWORD,yuyan
+DOMAIN-KEYWORD,mojie
+DOMAIN-KEYWORD,ikuuu
+
+DOMAIN,askahh.com
+
+DOMAIN,www.ffqla.com
+DOMAIN,widget.qweather.net
+
+DOMAIN-SUFFIX,metacubex.one

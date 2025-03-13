@@ -1,0 +1,384 @@
+# 配置名称 Clash 配置
+# 适用范围 Mihomo 内核
+
+# 基本配置
+mixed-port: 7890
+ipv6: false
+allow-lan: true
+unified-delay: true
+tcp-concurrent: true
+
+external-controller: 127.0.0.1:9090
+#external-ui: ui
+#external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+# 缓存设置
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 嗅探设置
+sniffer:
+  enable: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+
+# TUN设置
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
+  auto-route: true
+  auto-detect-interface: true
+
+# DNS设置
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+# 锚点 节点订阅参数
+# 每24小时更新一次，每10分钟一次健康检查
+NodeParam:
+  &NodeParam
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 600
+
+# 节点订阅
+proxy-providers:
+  Clash:
+    <<: *NodeParam
+    path: './Sub/Clash.yaml'
+    url: '自己连接'
+
+# 锚点 时延优选参数
+# 每6秒一次惰性健康检查，容差20ms，时延超2秒判定为失败，失败3次触发健康检查
+UrlTest:
+  &UrlTest
+    type: url-test
+    interval: 6
+    tolerance: 20
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    disable-udp: false
+    timeout: 2000
+    max-failed-times: 3
+    hidden: true
+    include-all-providers: true
+    
+# 锚点 故障转移参数
+# 每6秒一次惰性健康检查，时延超2秒判定为失败，失败3次触发健康检查
+FallBack:
+  &FallBack
+    type: fallback
+    interval: 6
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    disable-udp: false
+    timeout: 2000
+    max-failed-times: 3
+    hidden: true
+    include-all-providers: true
+    
+# 锚点 负载均衡参数
+# 每6秒一次惰性健康检查，时延超2秒判定为失败，失败3次触发健康检查
+LoadBalance:
+  &LoadBalance
+    type: load-balance
+    interval: 6
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    disable-udp: false
+    strategy: consistent-hashing
+    timeout: 2000
+    max-failed-times: 3
+    hidden: true
+    include-all-providers: true
+
+# 锚点 规则类型参数
+# 每24小时更新一次
+# 经典匹配
+classical:
+  &classical
+    type: http
+    behavior: classical
+    interval: 86400
+    format: yaml
+
+# 文本匹配
+text:
+  &text
+    type: http
+    behavior: classical
+    interval: 86400
+    format: text
+
+# 本地策略
+proxies:
+  - name: 直接连接
+    type: direct
+    udp: true
+
+  - name: 拒绝连接
+    type: reject
+
+# 代理策略
+proxy-groups:
+  - name: 全部节点
+    type: select
+    icon: https://raw.githubusercontent.com/shuisangongzi/icon/refs/heads/main/Clash.png
+    url: http://www.gstatic.com/generate_204
+    include-all-providers: true
+
+  - name: 漏网之鱼
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Catnet.png
+    proxies:
+      - 直接连接
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+
+  - name: 隐私保护
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hijacking.png
+    proxies:
+      - 拒绝连接
+      - 直接连接
+
+  - name: 规则修正
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
+    proxies:
+      - 全球服务
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+
+  - name: 电报服务
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies:
+      - 全球服务
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+
+  - name: 微软服务
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+    proxies:
+      - 全球服务
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+      - 直接连接
+
+  - name: 全球服务
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    proxies:
+      - 香港节点
+      - 台湾节点
+      - 日本节点
+      - 新国节点
+      - 美国节点
+      - 直接连接
+
+  - name: 大陆服务
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China_Map.png
+    proxies:
+      - 直接连接
+      - 拒绝连接
+
+# 节点策略
+  - name: 香港节点
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/HK.png
+    proxies:
+      - 香港优选
+      - 香港转移
+      - 香港均衡
+
+  - name: 台湾节点
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/TW.png
+    proxies:
+      - 台湾优选
+      - 台湾转移
+      - 台湾均衡
+
+  - name: 日本节点
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/JP.png
+    proxies:
+      - 日本优选
+      - 日本转移
+      - 日本均衡
+
+  - name: 新国节点
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/SG.png
+    proxies:
+      - 新国优选
+      - 新国转移
+      - 新国均衡
+
+  - name: 美国节点
+    type: select
+    icon: https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Gallery/Color/US.png
+    proxies:
+      - 美国优选
+      - 美国转移
+      - 美国均衡
+
+# 时延优选
+  - name: 香港优选
+    <<: *UrlTest
+    filter: 香港|港|HK|🇭🇰|(?i)Hong
+
+  - name: 台湾优选
+    <<: *UrlTest
+    filter: 台湾|台|TW|🇹🇼|(?i)Taiwan
+
+  - name: 日本优选
+    <<: *UrlTest
+    filter: 日本|本|JP|🇯🇵|(?i)Japan
+
+  - name: 新国优选
+    <<: *UrlTest
+    filter: 新加坡|狮|SG|🇸🇬|(?i)Singapore
+
+  - name: 美国优选
+    <<: *UrlTest
+    filter: 美国|美|US|🇺🇸|(?i)States
+
+# 故障转移
+  - name: 香港转移
+    <<: *FallBack
+    filter: 香港|港|HK|🇭🇰|(?i)Hong
+
+  - name: 台湾转移
+    <<: *FallBack
+    filter: 台湾|台|TW|🇹🇼|(?i)Taiwan
+
+  - name: 日本转移
+    <<: *FallBack
+    filter: 日本|本|JP|🇯🇵|(?i)Japan
+
+  - name: 新国转移
+    <<: *FallBack
+    filter: 新加坡|狮|SG|🇸🇬|(?i)Singapore
+
+  - name: 美国转移
+    <<: *FallBack
+    filter: 美国|美|US|🇺🇸|(?i)States
+
+# 负载均衡
+  - name: 香港均衡
+    <<: *LoadBalance
+    filter: 香港|港|HK|🇭🇰|(?i)Hong
+
+  - name: 台湾均衡
+    <<: *LoadBalance
+    filter: 台湾|台|TW|🇹🇼|(?i)Taiwan
+
+  - name: 日本均衡
+    <<: *LoadBalance
+    filter: 日本|本|JP|🇯🇵|(?i)Japan
+
+  - name: 新国均衡
+    <<: *LoadBalance
+    filter: 新加坡|狮|SG|🇸🇬|(?i)Singapore
+
+  - name: 美国均衡
+    <<: *LoadBalance
+    filter: 美国|美|US|🇺🇸|(?i)States
+
+# 订阅规则
+rule-providers:
+  规则修正:
+    <<: *text
+    path: './rules/Proxy.text'
+    url: https://raw.githubusercontent.com/shuisangongzi/Clash/refs/heads/main/Proxy.text
+
+  局域网络:
+    <<: *classical
+    path: './rules/Lan.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan_No_Resolve.yaml
+
+  隐私保护:
+    <<: *classical
+    path: './rules/Privacy.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Privacy/Privacy_Classical_No_Resolve.yaml
+
+  运营劫持:
+    <<: *classical
+    path: './rules/Hijacking.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Hijacking/Hijacking_No_Resolve.yaml
+
+  电报服务:
+    <<: *classical
+    path: './rules/Telegram.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram_No_Resolve.yaml
+
+  微软服务:
+    <<: *classical
+    path: './rules/Microsoft.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
+
+  全球服务:
+    <<: *classical
+    path: './rules/Global.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical_No_Resolve.yaml
+
+  大陆服务:
+    <<: *classical
+    path: './rules/ChinaMax.yaml'
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaMax/ChinaMax_Classical_No_Resolve.yaml
+
+# 规则指向
+rules:
+  - RULE-SET,规则修正,规则修正
+  - RULE-SET,隐私保护,隐私保护
+  - RULE-SET,运营劫持,隐私保护
+  - RULE-SET,电报服务,电报服务
+  - RULE-SET,微软服务,微软服务
+  - RULE-SET,全球服务,全球服务
+  - RULE-SET,大陆服务,大陆服务
+  - RULE-SET,局域网络,直接连接
+  - MATCH,漏网之鱼
