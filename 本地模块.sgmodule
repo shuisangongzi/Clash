@@ -1,0 +1,47 @@
+#!name=本地模块
+#!desc=本地-自定义\n分流,重写,脚本,MITM
+#!category=🏠本地模块
+
+[Rule]
+# 防止TG加载转圈
+IP-CIDR,95.161.76.100/31,REJECT,pre-matching,no-resolve,'notification-text="Fuck Telegram"' 
+
+[Map Local]
+# 招商银行开屏广告
+^https?:\/\/webappcfg\.paas\.cmbchina\.com\/v\d\/func\/getmarketconfig data-type=text data=" " status-code=200
+# 首页横幅广告
+^https?:\/\/mbmodule-openapi\.paas\.cmbchina\.com\/graphic\/v2\/module\/graphic data-type=text data="{}" status-code=200
+
+# 唯品会
+^https?:\/\/mapi\.appvipshop\.com\/vips-mobile\/rest\/activity\/advertisement\/get data-type=text data=" " status-code=200
+# APP+小程序弹窗广告
+^https?:\/\/mapi\.appvipshop\.com\/vips-mobile\/rest\/layout\/productList\/eventData\/v data-type=text data=" " status-code=200
+# 右下角悬浮窗，需手动关闭广告一次
+^https?:\/\/mapi\.appvipshop\.com\/vips-mobile\/rest\/activity\/coupon\/float_entrance\/get\?api_key data-type=text data=" " status-code=200
+
+[URL Rewrite]
+# 爱思助手
+^https?:\/\/list-app-m\.i4\.cn\/(adclickcb|getopfstadinfo)\.xhtml url reject
+
+# 腾讯微云
+^https?:\/\/us\.l\.qq\.com\/exapp\?adposcount=\d - reject
+
+# 唯品会
+^https?:\/\/b\.appsimg\.com\/upload\/momin - reject
+^https?:\/\/mapi\.appvipshop\.com\/vips-mobile\/rest\/iosAdInfo\/report - reject
+
+# 中国广电
+^https?:\/\/app\.10099\.com\.cn\/contact-web\/api\/version\/getFlashScreenPage - reject
+
+[Script]
+# > 哔哩哔哩繁体CC字幕转中文简体@ddgksf2013
+bilibili_cc = type=http-response, pattern=^https?:\/\/.*\.hdslb\.com\/bfs\/subtitle\/.+\.json, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/bilibili_cc.js, requires-body=true, max-size=-1, timeout=60
+
+# > BiliBili_哔哩哔哩_热搜发现@ddgksf2013
+bilibili_json = type=http-response, pattern=^https://app.bilibili.com/x/v2/search/square, script-path=https://raw.githubusercontent.com/ddgksf2013/Scripts/refs/heads/master/bilibili_json.js, requires-body=true, max-size=-1, timeout=60
+
+# ～ BiliBili_哔哩哔哩_搜索去广告@BiliUniverse
+response.bundle = type=http-response, pattern=^https?:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.polymer\.app\.search\.v1\.Search\/SearchAll$, script-path=https://github.com/BiliUniverse/ADBlock/releases/download/v0.6.19/response.bundle.js, requires-body=true, binary-body-mode=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% list-app-m.i4.cn,us.l.qq.com,i0.hdslb.com,aisubtitle.hdslb.com,webappcfg.paas.cmbchina.com, mbmodule-openapi.paas.cmbchina.com,app.10099.com.cn,b.appsimg.com, mapi.appvipshop.com

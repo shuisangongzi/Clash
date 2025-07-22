@@ -2,13 +2,8 @@
 # By Surge
 
 # 规则修正
-DOMAIN-KEYWORD,efcloud
-DOMAIN-KEYWORD,fccloud
-DOMAIN-KEYWORD,yuyan
-DOMAIN-KEYWORD,mojie
-DOMAIN-KEYWORD,ikuuu
-
-DOMAIN-KEYWORD,steam
+DOMAIN,boxjs.com
+DOMAIN,script.hub
 
 DOMAIN,askahh.com // Askahh博客
 
@@ -17,7 +12,10 @@ DOMAIN,widget.qweather.net
 
 DOMAIN-SUFFIX,metacubex.one // Mihomo
 
-DOMAIN,emby.bangumi.ca // Nya伟大 无需多言
+DOMAIN-KEYWORD,yuyan
+DOMAIN-KEYWORD,mojie
+DOMAIN-KEYWORD,ikuuu
+DOMAIN-KEYWORD,emovpn
+DOMAIN-KEYWORD,feiniaoyun
 
-DOMAIN-SUFFIX,as.cfhls.top // omofun
-DOMAIN-SUFFIX,akamaized.net // omofun
+DOMAIN-KEYWORD,mifun
