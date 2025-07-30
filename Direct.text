@@ -2,11 +2,12 @@
 # By Surge
 
 # 规则修正
-DOMAIN,ap-cn01.emby.bangumi.ca // Nya伟大 无需多言
-DOMAIN,emby.movier.ink // Nya伟大 无需多言
+DOMAIN,ap-cn01.emby.bangumi.ca
+DOMAIN,ap-cn02.emby.bangumi.ca // Nya伟大 无需多言
+
 DOMAIN,emby.jiandm.cn // Cay 归宿.
 
-DOMAIN,DOMAIN-SUFFIX,yingshi.tv // UZ影视
+DOMAIN-SUFFIX,yingshi.tv // UZ影视
 
 DOMAIN-KEYWORD,moefun
 DOMAIN-KEYWORD,aowu
