@@ -6,6 +6,15 @@
 # 防止TG加载转圈
 IP-CIDR,95.161.76.100/31,REJECT,pre-matching,no-resolve,'notification-text="Fuck Telegram"' 
 
+#NB 助手
+DOMAIN,api-dsp.8ziben.com,REJECT
+DOMAIN,sdk.zhangyuyidong.cn,REJECT
+DOMAIN,open.e.kuaishou.cn,REJECT
+DOMAIN,v66-ad.ndcjl.com,REJECT
+DOMAIN,api-events.8ziben.com,REJECT
+DOMAIN-SUFFIX,yximgs.com,REJECT
+DOMAIN-SUFFIX,adkwai.com,REJECT
+
 [Map Local]
 # 招商银行开屏广告
 ^https?:\/\/webappcfg\.paas\.cmbchina\.com\/v\d\/func\/getmarketconfig data-type=text data=" " status-code=200

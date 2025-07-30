@@ -1,0 +1,30 @@
+#!name=Emby分流
+#!desc=将 Emby 服务器和元数据流量统一分流到名为 'Emby' 的策略组。
+#!category=🏠本地模块
+#!arguments=EmbyProxy:Emby
+#!arguments-desc=EmbyProxy: 请填入你在 Surge 主配置文件中为 Emby 分流设定的策略组名称 (例如: Emby, Proxy, MySnellNode 等)。默认为 'Emby'。
+
+[Rule]
+# Emby 服务器域名分流 (请自行添加或修改你的 Emby 服务器域名)
+DOMAIN-SUFFIX,emby.bangumi.ca,{{{EmbyProxy}}}
+
+# Emby 元数据和字幕服务域名 (常用公共数据源)
+DOMAIN-SUFFIX,emby.media,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,emby.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,themoviedb.org,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,thetvdb.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,fanart.tv,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,imdb.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,tvmaze.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,opensubtitles.org,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,subscene.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,allocine.fr,{{{EmbyProxy}}}
+#DOMAIN-SUFFIX,douban.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,omdbapi.com,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,jellyfin.org,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,trakt.tv,{{{EmbyProxy}}} 
+DOMAIN-SUFFIX,anilist.co,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,kitsunekko.net,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,zimuku.cn,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,musicbrainz.org,{{{EmbyProxy}}}
+DOMAIN-SUFFIX,audiodb.com,{{{EmbyProxy}}}
